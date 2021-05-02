@@ -1,4 +1,3 @@
-botw_map_fix.js
 var presets = {
   "AttackUp": ["Animal_Insect_G", "Item_Plant_G", "Item_Fruit_H", "Item_Mushroom_L", "Animal_Fish_E", "Item_FishGet_E", "Animal_Insect_K", "Animal_Fish_F", "Item_FishGet_F"],
   "MovingSpeed": ["Animal_Insect_S", "Item_MushroomGet_D", "Item_Mushroom_D", "Item_PlantGet_M", "Item_Plant_M", "Animal_Insect_A", "Item_Plant_O", "Item_Fruit_E", "Item_PlantGet_O"],
