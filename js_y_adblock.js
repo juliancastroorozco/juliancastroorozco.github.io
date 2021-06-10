@@ -1,6 +1,6 @@
 var css = document.createElement("style");
 css.type = "text/css";
-css.innerHTML = ‘#player-container-id{ right: 0}; video{width: 100%}’;
+css.innerHTML = '#player-container-id{ right: 0}; video{width: 100%}';
 document.body.appendChild(css);
 
 setInterval(function (){
