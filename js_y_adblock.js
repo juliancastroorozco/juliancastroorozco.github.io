@@ -2,14 +2,19 @@ var css = document.createElement("style");
 css.type = "text/css";
 css.innerHTML = '#player-container-id{ right: 0}; video{width: 100%}';
 document.body.appendChild(css);
+document.getElementsByTagName("video")[0].onloadedmetadata = function() {
+  if(document.getElementsByClassName("ytp-ad-text")[0]){
+    document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
+  }  
+}
 
-setInterval(function (){
+/*setInterval(function (){
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
-    document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 1
+    document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
     document.getElementsByTagName("video")[0].play();
   }
-},100);
+},100);*/
 
 
 
