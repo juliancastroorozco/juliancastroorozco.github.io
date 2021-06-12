@@ -13,7 +13,9 @@ setInterval(function (){
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
     document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
-    document.getElementsByTagName("video")[0].play();
+    setTimeout(function(){
+      document.getElementsByTagName("video")[0].play();
+    },1000)
   }
 },100);
 
