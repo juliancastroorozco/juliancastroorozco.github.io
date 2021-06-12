@@ -9,4 +9,15 @@ setInterval(function (){
     document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 1
     document.getElementsByTagName("video")[0].play();
   }
-},10)
+},100);
+
+
+
+(function(open) {
+  XMLHttpRequest.prototype.open = function() {    
+    if(arguments[1].match('ad_break')){
+      return;
+    }
+     open.apply(this, arguments);
+  };
+})(XMLHttpRequest.prototype.open);
