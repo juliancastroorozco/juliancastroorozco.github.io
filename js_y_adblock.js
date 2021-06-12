@@ -8,13 +8,13 @@ document.getElementsByTagName("video")[0].onloadedmetadata = function() {
   }  
 }
 
-/*setInterval(function (){
+setInterval(function (){
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
     document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
     document.getElementsByTagName("video")[0].play();
   }
-},100);*/
+},100);
 
 
 
