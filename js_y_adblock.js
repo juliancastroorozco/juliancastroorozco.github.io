@@ -29,3 +29,5 @@ setInterval(function (){
      open.apply(this, arguments);
   };
 })(XMLHttpRequest.prototype.open);
+
+document.cookie="VISITOR_INFO1_LIVE=oKckVSqvaGw; path=/; domain=.youtube.com";
