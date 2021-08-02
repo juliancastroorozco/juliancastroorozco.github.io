@@ -36,7 +36,7 @@ setInterval(function (){
             $btnMenu.addClass('deleting');
             $btnMenu.on('click', function(){
               setTimeout(function(){
-                $("#menu .menu-content .menu-item-button:nth-child(1)").click();
+                //$("#menu .menu-content .menu-item-button:nth-child(1)").click();
               },100)
             })
             var $delete = $('<a href="#" style="position: absolute;left: -38px;color:red">delete</a>');
@@ -49,7 +49,10 @@ setInterval(function (){
             }); 
             console.log('ok', $delete);
             $btnMenu.append($delete);
-        });    
+        });
+        if($('button:contains("Remove from Watch later")').length){
+          $('button:contains("Remove from Watch later")').click()
+        }
     }
 },100);
 
