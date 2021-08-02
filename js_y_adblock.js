@@ -27,19 +27,20 @@ setInterval(function (){
     if(!$('.mobile-topbar-header-content .compact-link-endpoint').length && $btnWL){
         $('.mobile-topbar-header-content').append($btnWL);
     }
-    if(location.href.match('playlist?list=WL') ){
-        $('#contents button[aria-label="Action menu"]:not(.deleting), #playlist  button[aria-label="Action menu"]:not(.deleting)').each(function(){
-            var $btnWL = $(this);
-            $btnWL.addClass('deleting');
-            var $delete = $('<a href="#" style="position: absolute;left: -38px;color:white">detele</a>');
+    if(location.href.indexOf("playlist?list=WL")>0){
+        $('.page-container button[aria-label="Action menu"]:not(.deleting), #contents button[aria-label="Action menu"]:not(.deleting), #playlist  button[aria-label="Action menu"]:not(.deleting)').each(function(){
+            var $btnMenu = $(this);
+            $btnMenu.addClass('deleting');
+            var $delete = $('<a href="#" style="position: absolute;left: -38px;color:red">delete</a>');
             $delete.on('click',function(e){
                 e.preventDefault();
-                $btnWL.click()
+                $btnMenu.click()
                 setTimeout(function(){
                     $("#items > ytd-menu-service-item-renderer:nth-child(3)").click();
                 },100);
-            });
-            $btnWL.prepend($delete);
+            }); 
+            console.log('ok', $delete);
+            $btnMenu.prepend($delete);
         });    
     }
 },100);
