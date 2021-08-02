@@ -1,4 +1,5 @@
 var css = document.createElement("style");
+var $btnWL = null;
 css.type = "text/css";
 css.innerHTML = '#player-container-id{ right: 0}; video{width: 100%}';
 document.body.appendChild(css);
@@ -17,6 +18,12 @@ setInterval(function (){
       document.getElementsByTagName("video")[0].play();
     },1000)
   }
+    if(location.href.match('feed/library') && !$btnWL){
+        $btnWL = $('a[href="/playlist?list=WL"]');
+    }
+    if(!$('.mobile-topbar-header-content .compact-link-endpoint').length && $btnWL){
+        $('.mobile-topbar-header-content').append($btnWL);
+    }
 },100);
 
 
