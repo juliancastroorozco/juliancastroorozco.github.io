@@ -35,7 +35,9 @@ setInterval(function (){
             var $btnMenu = $(this);
             $btnMenu.addClass('deleting');
             $btnMenu.on('click', function(){
-              $("#menu .menu-content .menu-item-button:nth-child(1)").click();
+              setTimeout(function(){
+                $("#menu .menu-content .menu-item-button:nth-child(1)").click();
+              },100)
             })
             var $delete = $('<a href="#" style="position: absolute;left: -38px;color:red">delete</a>');
             $delete.on('click',function(e){
