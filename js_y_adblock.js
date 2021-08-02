@@ -23,10 +23,11 @@ setInterval(function (){
   }
     if(location.href.match('feed/library') && !$btnWL){
         $btnWL = $('a[href="/playlist?list=WL"]');
+        $btnWL.addClass('goWL');
         console.log('found btn')
     }
-    if(!$('.mobile-topbar-header-content .compact-link-endpoint').length && $btnWL){
-        $('.mobile-topbar-header-content').append($btnWL);
+    if($('.mobile-topbar-header-content.non-search-mode').length && !$('.mobile-topbar-header-content.non-search-mode .goWL').length  && $btnWL){
+        $('.mobile-topbar-header-content.non-search-mode').append($btnWL);
         console.log('append btn')
     }
     if(location.href.indexOf("playlist?list=WL")>0){
@@ -42,7 +43,7 @@ setInterval(function (){
                 },100);
             }); 
             console.log('ok', $delete);
-            $btnMenu.prepend($delete);
+            $btnMenu.append($delete);
         });    
     }
 },100);
