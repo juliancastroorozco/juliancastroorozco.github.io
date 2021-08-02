@@ -23,9 +23,11 @@ setInterval(function (){
   }
     if(location.href.match('feed/library') && !$btnWL){
         $btnWL = $('a[href="/playlist?list=WL"]');
+        console.log('found btn')
     }
     if(!$('.mobile-topbar-header-content .compact-link-endpoint').length && $btnWL){
         $('.mobile-topbar-header-content').append($btnWL);
+        console.log('append btn')
     }
     if(location.href.indexOf("playlist?list=WL")>0){
         $('.page-container button[aria-label="Action menu"]:not(.deleting), #contents button[aria-label="Action menu"]:not(.deleting), #playlist  button[aria-label="Action menu"]:not(.deleting)').each(function(){
