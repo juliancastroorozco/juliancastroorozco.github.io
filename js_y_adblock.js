@@ -34,12 +34,15 @@ setInterval(function (){
         $('.page-container button[aria-label="Action menu"]:not(.deleting), #contents button[aria-label="Action menu"]:not(.deleting), #playlist  button[aria-label="Action menu"]:not(.deleting)').each(function(){
             var $btnMenu = $(this);
             $btnMenu.addClass('deleting');
+            $btnMenu.on('click', function(){
+              $("#menu .menu-content .menu-item-button:nth-child(1)").click();
+            })
             var $delete = $('<a href="#" style="position: absolute;left: -38px;color:red">delete</a>');
             $delete.on('click',function(e){
                 e.preventDefault();
                 $btnMenu.click()
                 setTimeout(function(){
-                    $("#items > ytd-menu-service-item-renderer:nth-child(3)").click();
+                    $("#items > ytd-menu-service-item-renderer:nth-child(1)").click();
                 },100);
             }); 
             console.log('ok', $delete);
