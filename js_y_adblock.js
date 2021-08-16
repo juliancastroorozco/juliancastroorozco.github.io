@@ -27,6 +27,7 @@ setInterval(function (){
         console.log('found btn')
     }
     if($('.mobile-topbar-header-content.non-search-mode').length && !$('.mobile-topbar-header-content.non-search-mode .goWL').length  && $btnWL){
+        $btnWL.append('<div id="clock"></div>');
         $('.mobile-topbar-header-content.non-search-mode').append($btnWL);
         console.log('append btn')
     }
@@ -54,6 +55,7 @@ setInterval(function (){
           $('button:contains("Remove from Watch later")').click()
         }
     }
+    $('#clock').html('&nbsp&nbsp&nbsp&nbsp '+(new Date()).toLocaleTimeString());
 },100);
 
 
