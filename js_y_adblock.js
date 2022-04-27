@@ -16,7 +16,11 @@ document.getElementsByTagName("video")[0].onloadedmetadata = function() {
 setInterval(function (){
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
-    document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
+    try{
+      document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
+    }catch(e){
+      document.getElementsByTagName("video")[1].currentTime = document.getElementsByTagName("video")[1].duration - 0.01;
+    }
     setTimeout(function(){
       document.getElementsByTagName("video")[0].play();
     },1000)
