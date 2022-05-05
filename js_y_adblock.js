@@ -14,6 +14,12 @@ document.getElementsByTagName("video")[0].onloadedmetadata = function() {
 }
 */
 setInterval(function (){
+  if(!$('#player .blocktap').length){
+    try{
+      $('#player').prepend('<div class="blocktap" style="position: absolute;top: 20%;width: 30%;height: 70%;z-index: 99999999999999;"></div>');
+    }catch(e){      
+    }      
+  }
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
     try{
