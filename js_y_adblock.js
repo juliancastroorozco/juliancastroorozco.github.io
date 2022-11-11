@@ -25,7 +25,7 @@ $.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1EBXGOzGvsrv4FarFRTDDXr
 setInterval(function (){
   if(!$('#player .blocktap').length){
     try{
-      $('#player').prepend('<div class="blocktap" style="position: absolute;top: 20%;width: 30%;height: 70%;z-index: 99999999999999;"></div>');
+      //$('#player').prepend('<div class="blocktap" style="position: absolute;top: 20%;width: 30%;height: 70%;z-index: 99999999999999;"></div>');
     }catch(e){      
     }      
   }
