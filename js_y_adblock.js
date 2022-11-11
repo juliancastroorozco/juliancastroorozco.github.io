@@ -33,6 +33,7 @@ setInterval(function (){
   }
     if(location.href.match('feed/library') && !$btnWL){
         $btnWL = $('a[href="/playlist?list=WL"]');
+        $btnWL.find('div').remove();
         $btnWL.addClass('goWL');
         console.log('found btn')
     }
