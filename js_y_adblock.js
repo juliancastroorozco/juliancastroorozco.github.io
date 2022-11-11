@@ -43,7 +43,7 @@ setInterval(function (){
   var channelName = $('.slim-owner-channel-name').text();
   if(document.getElementsByTagName("video").length){
     var timeleft = document.getElementsByTagName("video")[0].duration - document.getElementsByTagName("video")[0].currentTime;
-    if(channelSkip[channelName] && timeleft <= channelSkip[channelName]){
+    if(channelSkip[channelName] && timeleft <= channelSkip[channelName] && timeleft >1){
       document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
     }  
   }
