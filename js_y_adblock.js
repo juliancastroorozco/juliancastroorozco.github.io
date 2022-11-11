@@ -13,6 +13,15 @@ document.getElementsByTagName("video")[0].onloadedmetadata = function() {
   }  
 }
 */
+var channelSkip = {};
+$.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1EBXGOzGvsrv4FarFRTDDXruilBp-pVnjCDsgtqn4zW4/gviz/tq?tqx=out:JSON&sheet=channels&tq=SELECT A,B", success: function(result){
+  var t = result.split('setResponse(')[1].split(');')[0];
+  var data = JSON.parse(t);
+  channelSkip = data.table.rows.reduce(function(pre,cur){
+    pre[cur.c[0].v] = cur.c[1].v
+    return pre;
+    },{})
+  }});
 setInterval(function (){
   if(!$('#player .blocktap').length){
     try{
@@ -30,6 +39,13 @@ setInterval(function (){
     setTimeout(function(){
       document.getElementsByTagName("video")[0].play();
     },1000)
+  }
+  var channelName = $('.slim-owner-channel-name').text();
+  if(document.getElementsByTagName("video").length){
+    var timeleft = document.getElementsByTagName("video")[0].duration - document.getElementsByTagName("video")[0].currentTime;
+    if(channelSkip[channelName] && timeleft <= channelSkip[channelName]){
+      document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
+    }  
   }
     if(location.href.match('feed/library') && !$btnWL){
         $btnWL = $('a[href="/playlist?list=WL"]');
