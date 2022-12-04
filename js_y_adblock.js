@@ -46,6 +46,31 @@ setInterval(function (){
     if(channelSkip[channelName] && timeleft <= channelSkip[channelName] && timeleft >1){
       document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
     }  
+
+    if ($('button[aria-label="Save to playlist"]:not(.unwatched)').length) {
+      if(channelSkip[channelName] > 0 ){
+          timeleft -= channelSkip[channelName];
+      }
+      if(timeleft < 5 && $('button[aria-label="Save to playlist"]').length){
+          $('button[aria-label="Save to playlist"]').addClass('unwatched')
+          $('button[aria-label="Save to playlist"]').click();
+
+          var tw = setInterval(()=>{
+              if($('button[aria-label="Watch later Private"]').length){
+                  clearInterval(tw)
+                  $('button[aria-label="Watch later Private"]')[0].click()
+                  var tu = setInterval(()=>{
+                      if($('button[aria-label="Undo"]').length){
+                          $('button[aria-label="Undo"]').click();
+                          $('button[aria-label="Save to playlist"]').remove();
+                          clearInterval(tu)
+                      }
+                  },100)
+              }
+          },100)
+      }
+
+    }
   }
     if(location.href.match('feed/library') && !$btnWL){
         $btnWL = $('a[href="/playlist?list=WL"]');
