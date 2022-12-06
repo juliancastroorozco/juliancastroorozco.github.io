@@ -14,11 +14,15 @@ document.getElementsByTagName("video")[0].onloadedmetadata = function() {
 }
 */
 var channelSkip = {};
-$.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1EBXGOzGvsrv4FarFRTDDXruilBp-pVnjCDsgtqn4zW4/gviz/tq?tqx=out:JSON&sheet=channels&tq=SELECT A,B", success: function(result){
+var channelStartSkip = {};
+var channelNoSkip = {};
+$.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1EBXGOzGvsrv4FarFRTDDXruilBp-pVnjCDsgtqn4zW4/gviz/tq?tqx=out:JSON&sheet=channels&tq=SELECT A,B,C,D", success: function(result){
   var t = result.split('setResponse(')[1].split(');')[0];
   var data = JSON.parse(t);
   channelSkip = data.table.rows.reduce(function(pre,cur){
-    pre[cur.c[0].v] = cur.c[1].v
+    cur.c[1] && cur.c[1].v && (pre[cur.c[0].v] = cur.c[1].v)
+    cur.c[2] && cur.c[2].v && (channelStartSkip[cur.c[0].v] = cur.c[2].v)
+    cur.c[3] && cur.c[3].v && (channelNoSkip[cur.c[3].v] = true)
     return pre;
     },{})
   }});
@@ -43,11 +47,17 @@ setInterval(function (){
   var channelName = $('.slim-owner-channel-name').text();
   if(document.getElementsByTagName("video").length){
     var timeleft = document.getElementsByTagName("video")[0].duration - document.getElementsByTagName("video")[0].currentTime;
+    var timeCurrent = document.getElementsByTagName("video")[0].currentTime;
+    if (channelStartSkip[channelName] && timeCurrent < channelStartSkip[channelName] && timeCurrent > 0) {
+      document.getElementsByTagName("video")[0].currentTime = channelStartSkip[channelName] + 0.01;
+    }
     if(channelSkip[channelName] && timeleft <= channelSkip[channelName] && timeleft >1){
       document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration - 0.01;
     }  
-
-    if ($('button[aria-label="Save to playlist"]:not(.unwatched)').length) {
+    var name = "v";
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    var videoId = results[1];
+    if ($('button[aria-label="Save to playlist"]:not(.unwatched)').length && !channelNoSkip[videoId]) {
       if(channelSkip[channelName] > 0 ){
           timeleft -= channelSkip[channelName];
       }
