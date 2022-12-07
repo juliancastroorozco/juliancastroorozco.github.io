@@ -56,7 +56,7 @@ setInterval(function (){
     }  
     var name = "v";
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-    var videoId = results[1];
+    var videoId = results && results[1] || null;
     if ($('button[aria-label="Save to playlist"]:not(.unwatched)').length && !channelNoSkip[videoId]) {
       if(channelSkip[channelName] > 0 ){
           timeleft -= channelSkip[channelName];
