@@ -65,11 +65,11 @@ setInterval(function (){
           $('button[aria-label="Save to playlist"]').addClass('unwatched')
           $('button[aria-label="Save to playlist"]').click();
 
-          var tw = setInterval(()=>{
+          var tw = setInterval(function(){
               if($('button[aria-label="Watch later Private"]').length){
                   clearInterval(tw)
                   $('button[aria-label="Watch later Private"]')[0].click()
-                  var tu = setInterval(()=>{
+                  var tu = setInterval(function(){
                       if($('button[aria-label="Undo"]').length){
                           $('button[aria-label="Undo"]').click();
                           $('button[aria-label="Save to playlist"]').remove();
