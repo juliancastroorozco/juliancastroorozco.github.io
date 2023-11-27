@@ -79,7 +79,7 @@ setInterval(function (){
                           clearInterval(tu);
                           setTimeout(function(){
                             $('button[aria-label="Collapse"]').click()
-                          },3000)
+                          },6000)
                       }
                   },100)
               }
