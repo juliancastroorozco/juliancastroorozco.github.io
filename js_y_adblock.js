@@ -33,6 +33,9 @@ setInterval(function (){
     }catch(e){      
     }      
   }
+  if(document.getElementsByTagName("video").length && document.getElementsByTagName("video")[0].currentTime < 2 && $('*[aria-label="Ocultar"]').length){
+    $('*[aria-label="Ocultar"]').click()
+  }
   if(document.getElementsByClassName("ytp-ad-text")[0] && document.getElementsByTagName("video")[0].currentTime < 2){
     //document.getElementsByTagName("video")[0].currentTime = document.getElementsByTagName("video")[0].duration;
     try{
@@ -73,7 +76,10 @@ setInterval(function (){
                       if($('button[aria-label="Undo"]').length){
                           $('button[aria-label="Undo"]').click();
                           $('button[aria-label="Save to playlist"]').remove();
-                          clearInterval(tu)
+                          clearInterval(tu);
+                          setTimeout(function(){
+                            $('button[aria-label="Collapse"]').click()
+                          },3000)
                       }
                   },100)
               }
