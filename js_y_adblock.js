@@ -4,7 +4,7 @@
 var css = document.createElement("style");
 var $btnWL = null;
 css.type = "text/css";
-css.innerHTML = '#player-container-id{ right: 0}; video{width: 100%}; .a-b-ma{left: unset !important;top: unset !important;width: 100% !important;height: 100% !important;border: unset;} .engagement-panel-container{display:none !important}';
+css.innerHTML = '#player-container-id{ right: 0}; video{width: 100%}; .a-b-ma{left: unset !important;top: unset !important;width: 100% !important;height: 100% !important;border: unset;} .engagement-panel-use-visibility, .engagement-panel-container{display:none !important}';
 document.body.appendChild(css);
 /*
 document.getElementsByTagName("video")[0].onloadedmetadata = function() {
