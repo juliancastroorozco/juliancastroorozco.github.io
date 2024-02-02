@@ -64,7 +64,10 @@ setInterval(function (){
       if(channelSkip[channelName] > 0 ){
           timeleft -= channelSkip[channelName];
       }
-      if(timeleft < 5 && $('button[aria-label="Save to playlist"]').length){
+      if(!location.href.match('list=WL')){
+        return;
+      }
+      if(timeleft < 5 && $('button[aria-label="Save to playlist"]:not(.unwatched)').length){
           $('button[aria-label="Save to playlist"]').addClass('unwatched')
           $('button[aria-label="Save to playlist"]').click();
 
