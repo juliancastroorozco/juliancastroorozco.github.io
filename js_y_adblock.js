@@ -82,6 +82,7 @@ setInterval(function (){
                           clearInterval(tu);
                           setTimeout(function(){
                             $('button[aria-label="Collapse"]').click()
+                            $('#dialog-container button:last').click();//click cancel 
                           },6000)
                       }
                   },100)
