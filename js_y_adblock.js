@@ -98,7 +98,10 @@ setInterval(function (){
         $btnWL.addClass('goWL');
         console.log('found btn')
     }
-    if($('.mobile-topbar-header-content.non-search-mode').length && !$('.mobile-topbar-header-content.non-search-mode .goWL').length  && $btnWL){
+    if($('.mobile-topbar-header-content.non-search-mode').length && !$('.mobile-topbar-header-content.non-search-mode .goWL').length){
+        if(!$btnWL){
+          $btnWL = $('<div class="goWL"></div>')
+        }
         $btnWL.append('<div id="clock"></div>');
         $('.mobile-topbar-header-content.non-search-mode').append($btnWL);
         console.log('append btn')
