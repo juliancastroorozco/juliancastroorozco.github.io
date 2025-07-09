@@ -27,8 +27,12 @@ setInterval(async () => {
     await joyCon.rumble(600, 600, 0.5);
     // Listen for HID input reports.
     joyCon.addEventListener('hidinput', ({ detail }) => {
+      const {    
+    buttonStatus: buttons,
+  } = detail;
       // Careful, this fires at ~60fps.
-      console.log(`Input report from ${joyCon.device.productName}:`, detail);
+      console.log(`Input report from ${joyCon.device.productName}:`, {x:buttons.x,y:buttons.y,a:buttons.a,b:buttons.b});
+      buttonUpdated && buttonUpdated(buttons)
     });
     joyCon.eventListenerAttached = true;
   }
