@@ -5,7 +5,11 @@ import {
   JoyConRight,
   GeneralController,
 } from './joy-con-webhid.es.js';
-
+document.querySelector('.connect').addEventListener('click', async () => {
+  // `JoyCon.connectJoyCon()` handles the initial HID pairing.
+  // It keeps track of connected Joy-Cons in the `JoyCon.connectedJoyCons` Map.
+  await connectJoyCon();
+});
 setInterval(async () => {
   for (const joyCon of connectedJoyCons.values()) {
     if (joyCon.eventListenerAttached) {
