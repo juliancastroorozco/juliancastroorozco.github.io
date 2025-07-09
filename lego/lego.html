@@ -10,6 +10,9 @@
 <script>
 var lastButtons = {a:false,b:false,x:false,y:false};    
 function buttonUpdated(buttons){
+    if(!window.motorA || !window.motorB){
+        return;        
+    }
     if(buttons.a !== lastButtons.a ){//reverse
         window.motorA.setPower( buttons.a && -100 || 0)
         window.motorB.setPower( buttons.a && -100 || 0)
