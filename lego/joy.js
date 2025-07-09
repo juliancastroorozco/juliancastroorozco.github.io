@@ -22,7 +22,7 @@ setInterval(async () => {
     await joyCon.enableIMUMode();
     await joyCon.enableVibration();
     // Get information about the connected Joy-Con.
-    console.log(await joyCon.getDeviceInfo());
+    //console.log(await joyCon.getDeviceInfo());
     // Rumble.
     await joyCon.rumble(600, 600, 0.5);
     // Listen for HID input reports.
