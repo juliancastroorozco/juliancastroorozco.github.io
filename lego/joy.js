@@ -31,7 +31,7 @@ setInterval(async () => {
     buttonStatus: buttons,
   } = detail;
       // Careful, this fires at ~60fps.
-      console.log(`Input report from ${joyCon.device.productName}:`, {x:buttons.x,y:buttons.y,a:buttons.a,b:buttons.b});
+      //console.log(`Input report from ${joyCon.device.productName}:`, {x:buttons.x,y:buttons.y,a:buttons.a,b:buttons.b});
       buttonUpdated && buttonUpdated(buttons)
     });
     joyCon.eventListenerAttached = true;
