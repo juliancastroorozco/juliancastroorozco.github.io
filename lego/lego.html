@@ -8,7 +8,29 @@
 <script src="./joy.js" type="module"></script>
 <link rel="stylesheet" type="text/css" href="./web_bluetooth.css" />
 <script>
-
+var lastButtons = {a:false,b:false,x:false,y:false};    
+function buttonUpdated(buttons){
+    if(buttons.a !== lastButtons.a ){//reverse
+        window.motorA.setPower( buttons.a && -100 || 0)
+        window.motorB.setPower( buttons.a && -100 || 0)
+        lastButtons.a = buttons.a
+    }
+    if(buttons.b !== lastButtons.b){//left
+        window.motorA.setPower( buttons.b && -100 || 0)
+        window.motorB.setPower( buttons.b && 100 || 0)
+        lastButtons.b = buttons.b
+    }
+    if(buttons.x !== lastButtons.x){//right
+        window.motorA.setPower( buttons.x && 100 || 0)
+        window.motorB.setPower( buttons.x && -100 || 0)
+        lastButtons.x = buttons.x
+    }
+    if(buttons.y !== lastButtons.y){//forward
+        window.motorA.setPower( buttons.y && 100 || 0)
+        window.motorB.setPower( buttons.y && 100 || 0)
+        lastButtons.y = buttons.y
+    }
+}
 const poweredUP = new PoweredUP.PoweredUP();
 
 poweredUP.on("discover", async (hub) => { // Wait to discover hubs
