@@ -22,7 +22,8 @@ poweredUP.on("discover", async (hub) => { // Wait to discover hubs
 
     await hub.connect(); // Connect to hub
     log(`Connected to ${hub.name}!`);
-
+    window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
+    window.motorB = await hub.waitForDeviceAtPort("B");
     hub.on("disconnect", () => {
         log(`Disconnected ${hub.name}`);
     })
