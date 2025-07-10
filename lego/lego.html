@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Web Bluetooth node-poweredup Example</title>
+    <title>Web Bluetooth node-poweredup Example 2</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/node-poweredup@latest/dist/browser/poweredup.js"></script> -->
     <script src="../dist/browser/poweredup.js"></script>
     <script src="./joy.js" type="module"></script>
@@ -22,13 +22,13 @@
                 lastButtons.a = buttons.a
             }
             if (buttons.b !== lastButtons.b) {//left
-                window.motorA.setPower(buttons.b && -motorAForward || 0)
-                window.motorB.setPower(buttons.b && motorBForward || 0)
+                window.motorA.setPower(buttons.b && motorAForward || 0)
+                window.motorB.setPower(buttons.b && -motorBForward || 0)
                 lastButtons.b = buttons.b
             }
             if (buttons.x !== lastButtons.x) {//right
-                window.motorA.setPower(buttons.x && motorAForward || 0)
-                window.motorB.setPower(buttons.x && -motorBForward || 0)
+                window.motorA.setPower(buttons.x && -motorAForward || 0)
+                window.motorB.setPower(buttons.x && motorBForward || 0)
                 lastButtons.x = buttons.x
             }
             if (buttons.y !== lastButtons.y) {//forward
