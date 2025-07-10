@@ -2,143 +2,162 @@
 <html>
 
 <head>
-<title>Web Bluetooth node-poweredup Example</title>
-<!-- <script src="https://cdn.jsdelivr.net/npm/node-poweredup@latest/dist/browser/poweredup.js"></script> -->
-<script src="../dist/browser/poweredup.js"></script>
-<script src="./joy.js" type="module"></script>
-<link rel="stylesheet" type="text/css" href="./web_bluetooth.css" />
-<script>
-var lastButtons = {a:false,b:false,x:false,y:false};    
-function buttonUpdated(buttons){
-    if(!window.motorA || !window.motorB){
-        return;        
-    }
-    if(buttons.a !== lastButtons.a ){//reverse
-        window.motorA.setPower( buttons.a && -100 || 0)
-        window.motorB.setPower( buttons.a && -100 || 0)
-        lastButtons.a = buttons.a
-    }
-    if(buttons.b !== lastButtons.b){//left
-        window.motorA.setPower( buttons.b && -100 || 0)
-        window.motorB.setPower( buttons.b && 100 || 0)
-        lastButtons.b = buttons.b
-    }
-    if(buttons.x !== lastButtons.x){//right
-        window.motorA.setPower( buttons.x && 100 || 0)
-        window.motorB.setPower( buttons.x && -100 || 0)
-        lastButtons.x = buttons.x
-    }
-    if(buttons.y !== lastButtons.y){//forward
-        window.motorA.setPower( buttons.y && 100 || 0)
-        window.motorB.setPower( buttons.y && 100 || 0)
-        lastButtons.y = buttons.y
-    }
-}
-const poweredUP = new PoweredUP.PoweredUP();
+    <title>Web Bluetooth node-poweredup Example</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/node-poweredup@latest/dist/browser/poweredup.js"></script> -->
+    <script src="../dist/browser/poweredup.js"></script>
+    <script src="./joy.js" type="module"></script>
+    <link rel="stylesheet" type="text/css" href="./web_bluetooth.css" />
+    <script>
+        var lastButtons = { a: false, b: false, x: false, y: false, r: false };
+        const motorAForward = -100;
+        const motorBForward = 100;
+        let colour = 0;
+        function buttonUpdated(buttons) {
+            if (!window.motorA || !window.motorB) {
+                return;
+            }
+            if (buttons.a !== lastButtons.a) {//reverse
+                window.motorA.setPower(buttons.a && -motorAForward || 0)
+                window.motorB.setPower(buttons.a && -motorBForward || 0)
+                lastButtons.a = buttons.a
+            }
+            if (buttons.b !== lastButtons.b) {//left
+                window.motorA.setPower(buttons.b && -motorAForward || 0)
+                window.motorB.setPower(buttons.b && motorBForward || 0)
+                lastButtons.b = buttons.b
+            }
+            if (buttons.x !== lastButtons.x) {//right
+                window.motorA.setPower(buttons.x && motorAForward || 0)
+                window.motorB.setPower(buttons.x && -motorBForward || 0)
+                lastButtons.x = buttons.x
+            }
+            if (buttons.y !== lastButtons.y) {//forward
+                window.motorA.setPower(buttons.y && motorAForward || 0)
+                window.motorB.setPower(buttons.y && motorBForward || 0)
+                lastButtons.y = buttons.y
+            }
+            if (buttons.r !== lastButtons.r) {//change light
+                hub.waitForDeviceByType(PoweredUP.Consts.DeviceType.HUB_LED).then((led)=>{
+                    colour = (colour)%11+1;
+                    led.setColor(colour); // Set the color
+                    lastButtons.r = buttons.r
+                });
+                
+            }
+        }
+        const poweredUP = new PoweredUP.PoweredUP();
 
-poweredUP.on("discover", async (hub) => { // Wait to discover hubs
+        poweredUP.on("discover", async (hub) => { // Wait to discover hubs
 
-    hub.on("attach", (device) => {
-        log(`Device ${device.typeName} attached to port ${device.portName}`) ;
-    });
+            hub.on("attach", (device) => {
+                log(`Device ${device.typeName} attached to port ${device.portName}`);
+            });
 
-    hub.on("detach", (device) => {
-        log(`Device ${device.typeName} detached to port ${device.portName}`) ;
-    });
+            hub.on("detach", (device) => {
+                log(`Device ${device.typeName} detached to port ${device.portName}`);
+            });
 
-    await hub.connect(); // Connect to hub
-    log(`Connected to ${hub.name}!`);
-    window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
-    window.motorB = await hub.waitForDeviceAtPort("B");
-    hub.on("disconnect", () => {
-        log(`Disconnected ${hub.name}`);
-    })
+            await hub.connect(); // Connect to hub
+            log(`Connected to ${hub.name}!`);
+            window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
+            window.motorB = await hub.waitForDeviceAtPort("B");
+            hub.on("disconnect", () => {
+                log(`Disconnected ${hub.name}`);
+            })
 
-    hub.on("tilt", (device, { x, y, z }) => {
-        log(`Tilt detected on port ${device.portName} (X: ${x}, Y: ${y}${z !== undefined ? `, Z: ${z}`: ""})`);
-    });
+            hub.on("tilt", (device, { x, y, z }) => {
+                log(`Tilt detected on port ${device.portName} (X: ${x}, Y: ${y}${z !== undefined ? `, Z: ${z}` : ""})`);
+            });
 
-    hub.on("distance", (device, { distance }) => {
-        log(`Motion detected on port ${device.portName} (Distance: ${distance})`);
-    });
+            hub.on("distance", (device, { distance }) => {
+                log(`Motion detected on port ${device.portName} (Distance: ${distance})`);
+            });
 
-    hub.on("rotate", (device, { degrees }) => {
-        log(`Rotation detected on port ${device.portName} (Degrees: ${degrees})`);
-    });
+            hub.on("rotate", (device, { degrees }) => {
+                log(`Rotation detected on port ${device.portName} (Degrees: ${degrees})`);
+            });
 
-    hub.on("button", ({ event }) => {
-        log(`Green button press detected (Event: ${event})`);
-    });
+            hub.on("button", ({ event }) => {
+                log(`Green button press detected (Event: ${event})`);
+            });
 
-    hub.on("remoteButton", (device, { event }) => {
-        log(`Remote control button press detected on port ${device.portName} (Event: ${event})`);
-    });
+            hub.on("remoteButton", (device, { event }) => {
+                log(`Remote control button press detected on port ${device.portName} (Event: ${event})`);
+            });
 
-    renderHub(hub);
+            renderHub(hub);
+            window.hub = hub;
+        });
 
-});
+        let color = 1;
+        /*setInterval(() => {
 
-let color = 1;
-setInterval(() => {
+            const hubs = poweredUP.getHubs(); // Get an array of all connected hubs
+            document.getElementById("color").style.backgroundColor = PoweredUP.Consts.ColorNames[color];
+            hubs.forEach(async (hub) => {
+                const led = await hub.waitForDeviceByType(PoweredUP.Consts.DeviceType.HUB_LED);
+                led.setColor(color); // Set the color
+            })
+            color++;
+            if (color > 10) {
+                color = 1;
+            }
 
-    const hubs = poweredUP.getHubs(); // Get an array of all connected hubs
-    document.getElementById("color").style.backgroundColor = PoweredUP.Consts.ColorNames[color];
-    hubs.forEach(async (hub) => {
-        const led = await hub.waitForDeviceByType(PoweredUP.Consts.DeviceType.HUB_LED);
-        led.setColor(color); // Set the color
-    })
-    color++;
-    if (color > 10) {
-        color = 1;
-    }
+        }, 2000);*/
 
-}, 2000);
+        const log = function (str) {
+            const element = document.getElementById("console");
+            element.innerHTML += `${str}<br />`;
+            element.scrollTop = element.scrollHeight;
+        }
 
-const log = function (str) {
-    const element = document.getElementById("console");
-    element.innerHTML += `${str}<br />`;
-    element.scrollTop = element.scrollHeight;
-}
+        const renderHub = function (hub) {
+            const element = document.createElement("tr");
+            element.setAttribute("id", `hub-${encodeURIComponent(hub.uuid)}`);
+            element.innerHTML = `<td>${hub.name}</td><td>${PoweredUP.Consts.HubTypeNames[hub.type]}</td><td class="disconnect_btn"><a href="#" onclick="disconnect('${encodeURIComponent(hub.uuid)}');">Disconnect</a></td>`;
+            document.getElementById("hubs").appendChild(element);
+        }
 
-const renderHub = function (hub) {
-    const element = document.createElement("tr");
-    element.setAttribute("id", `hub-${encodeURIComponent(hub.uuid)}`);
-    element.innerHTML = `<td>${hub.name}</td><td>${PoweredUP.Consts.HubTypeNames[hub.type]}</td><td class="disconnect_btn"><a href="#" onclick="disconnect('${encodeURIComponent(hub.uuid)}');">Disconnect</a></td>`;
-    document.getElementById("hubs").appendChild(element);
-}
+        const scan = function () {
+            if (PoweredUP.isWebBluetooth) {
+                poweredUP.scan(); // Start scanning for hubs
+            } else {
+                alert("Your browser does not support the Web Bluetooth specification.");
+            }
+        }
 
-const scan = function () {
-    if (PoweredUP.isWebBluetooth) {
-        poweredUP.scan(); // Start scanning for hubs
-    } else {
-        alert("Your browser does not support the Web Bluetooth specification.");
-    }
-}
+        const disconnect = function (uuid) {
+            poweredUP.getHubByUUID(decodeURIComponent(uuid)).disconnect();
+            document.getElementById(`hub-${uuid}`).remove();
+        }
 
-const disconnect = function (uuid) {
-    poweredUP.getHubByUUID(decodeURIComponent(uuid)).disconnect();
-    document.getElementById(`hub-${uuid}`).remove();
-}
-
-</script>
+    </script>
 </head>
 
 <body>
-<div><h1>Web Bluetooth node-poweredup Example</h1></div>
-    <button class="connect" type="button">Connect Joy-Con</button>
-<div>
-    
-<a class="button" href="#" onclick="scan();">Add new Hub</a>
-</div>
-<div id="current_color">
-<span>Current Color: </span><div id="color">&nbsp;</div>
-</div>
-<div>
-<table id="hubs">
-<thead class="headings"><td>Name</td><td>Type</td></thead>
-</table>
-</div>
-<div id="console"></div>
+    <div>
+        <h1>Web Bluetooth node-poweredup Example</h1>
+    </div>
+    <div>
+        <button class="connect" type="button">Connect Joy-Con</button>
+    </div>
+    <div>
+
+        <a class="button" href="#" onclick="scan();">Add new Hub</a>
+    </div>
+    <div id="current_color">
+        <span>Current Color: </span>
+        <div id="color">&nbsp;</div>
+    </div>
+    <div>
+        <table id="hubs">
+            <thead class="headings">
+                <td>Name</td>
+                <td>Type</td>
+            </thead>
+        </table>
+    </div>
+    <div id="console"></div>
 </body>
 
 </html>
