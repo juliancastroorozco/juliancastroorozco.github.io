@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Web Bluetooth node-poweredup Example 2</title>
+    <title>Web Bluetooth node-poweredup Example 3</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/node-poweredup@latest/dist/browser/poweredup.js"></script> -->
     <script src="../dist/browser/poweredup.js"></script>
     <script src="./joy.js" type="module"></script>
@@ -36,7 +36,7 @@
                 window.motorB.setPower(buttons.y && motorBForward || 0)
                 lastButtons.y = buttons.y
             }
-            if (buttons.r !== lastButtons.r) {//change light
+            if (buttons.r !== lastButtons.r && buttons.r) {//change light
                 hub.waitForDeviceByType(PoweredUP.Consts.DeviceType.HUB_LED).then((led)=>{
                     colour = (colour)%11+1;
                     led.setColor(colour); // Set the color
@@ -136,7 +136,7 @@
 
 <body>
     <div>
-        <h1>Web Bluetooth node-poweredup Example</h1>
+        <h1>Web Bluetooth node-poweredup Example 3</h1>
     </div>
     <div>
         <button class="connect" type="button">Connect Joy-Con</button>
