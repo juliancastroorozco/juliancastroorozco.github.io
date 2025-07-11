@@ -7,6 +7,36 @@
     <script src="../dist/browser/poweredup.js"></script>
     <script src="./joy.js" type="module"></script>
     <link rel="stylesheet" type="text/css" href="./web_bluetooth.css" />
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue  } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js"
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+        const params = Object.fromEntries(new URLSearchParams( location.hash.replace('#','')))
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: params.apiKey,
+            authDomain: "test-push-msg-web.firebaseapp.com",
+            projectId: "test-push-msg-web",
+            storageBucket: "test-push-msg-web.firebasestorage.app",
+            messagingSenderId: "175650251396",
+            appId: "1:175650251396:web:c5b4fada916016818118d1",
+            databaseURL: params.databaseURL
+        };                    
+        // Initialize Firebase        
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const starCountRef = ref(db, 'commands/');
+        onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            //updateStarCount(postElement, data);
+            console.log(data)
+        });
+        set(ref(db, 'commands/'), {
+            a:false,b:true
+        });
+    </script>
     <script>
         var lastButtons = { a: false, b: false, x: false, y: false, r: false };
         const motorAForward = -100;
