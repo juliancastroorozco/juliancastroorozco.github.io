@@ -169,13 +169,13 @@
 
 <body>
     <div>
-        <h1>Web Bluetooth node-poweredup Example 5</h1>
+        <h1>Web Bluetooth node-poweredup Example 7</h1>
     </div>
     <div style="text-align:center;width:100%">            
-            <button onmousedown="sendMessage({y:true})" onmouseup="sendMessage({y:false})" style="user-select: none;"> ↑ </button><br><br>
-            <button onmousedown="sendMessage({b:true})" onmouseup="sendMessage({b:false})" style="user-select: none;"> ← </button>
-            <button onmousedown="sendMessage({x:true})" onmouseup="sendMessage({x:false})" style="user-select: none;"> → </button><br><br>
-            <button onmousedown="sendMessage({a:true})" onmouseup="sendMessage({a:false})" style="user-select: none;"> ↓ </button>
+            <button ontouchstart="sendMessage({y:true})" touchend="sendMessage({y:false})" onmousedown="sendMessage({y:true})" onmouseup="sendMessage({y:false})" style="user-select: none;"> ↑ </button><br><br>
+            <button ontouchstart="sendMessage({b:true})" touchend="sendMessage({b:false})" onmousedown="sendMessage({b:true})" onmouseup="sendMessage({b:false})" style="user-select: none;"> ← </button>
+            <button ontouchstart="sendMessage({x:true})" touchend="sendMessage({x:false})" onmousedown="sendMessage({x:true})" onmouseup="sendMessage({x:false})" style="user-select: none;"> → </button><br><br>
+            <button ontouchstart="sendMessage({a:true})" touchend="sendMessage({a:false})" onmousedown="sendMessage({a:true})" onmouseup="sendMessage({a:false})" style="user-select: none;"> ↓ </button>
     </div>    
     <div>
         <br/>
