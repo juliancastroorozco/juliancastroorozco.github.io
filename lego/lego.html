@@ -37,7 +37,7 @@
         set(ref(db, 'commands/'), {
             a:false,b:true
         });
-        function sendMessage(message){
+        window.sendMessage = function (message){
             set(ref(db, 'commands/'), message);            
         }
     </script>
