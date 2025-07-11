@@ -37,6 +37,9 @@
         set(ref(db, 'commands/'), {
             a:false,b:true
         });
+        function sendMessage(message){
+            set(ref(db, 'commands/'), message);            
+        }
     </script>
     <script>
         var lastButtons = { a: false, b: false, x: false, y: false, r: false };
@@ -168,11 +171,11 @@
     <div>
         <h1>Web Bluetooth node-poweredup Example 5</h1>
     </div>
-    <div style="text-align:center;width:320px;">            
-            <button onmousedown="buttonUpdated({y:true})" onmouseup="buttonUpdated({y:false})" style="user-select: none;"> ↑ </button><br><br>
-            <button onmousedown="buttonUpdated({b:true})" onmouseup="buttonUpdated({b:false})" style="user-select: none;"> ← </button>
-            <button onmousedown="buttonUpdated({x:true})" onmouseup="buttonUpdated({x:false})" style="user-select: none;"> → </button><br><br>
-            <button onmousedown="buttonUpdated({a:true})" onmouseup="buttonUpdated({a:false})" style="user-select: none;"> ↓ </button>
+    <div style="text-align:center;width:100%">            
+            <button onmousedown="sendMessage({y:true})" onmouseup="sendMessage({y:false})" style="user-select: none;"> ↑ </button><br><br>
+            <button onmousedown="sendMessage({b:true})" onmouseup="sendMessage({b:false})" style="user-select: none;"> ← </button>
+            <button onmousedown="sendMessage({x:true})" onmouseup="sendMessage({x:false})" style="user-select: none;"> → </button><br><br>
+            <button onmousedown="sendMessage({a:true})" onmouseup="sendMessage({a:false})" style="user-select: none;"> ↓ </button>
     </div>    
     <div>
         <br/>
