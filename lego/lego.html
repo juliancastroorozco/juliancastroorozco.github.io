@@ -61,7 +61,7 @@
         const motorBForward = 100;
         let colour = 0;
         function buttonUpdated(buttons) {
-            log(buttons)
+            log(JSON.stringify(buttons))
             if (!window.motorA || !window.motorB) {
                 return;
             }
