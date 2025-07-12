@@ -1,4 +1,4 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -190,6 +190,7 @@ e<!DOCTYPE html>
     <div style="text-align:center;width:100%">            
             <button ontouchstart="sendMessage({y:true},'start')" ontouchend="sendMessage({y:false},'end')" touchcancel="sendMessage({y:false},'cancel')" style="user-select: none;"> ↑ </button><br><br>
             <button ontouchstart="sendMessage({b:true},'start')" ontouchend="sendMessage({b:false},'end')" touchcancel="sendMessage({b:false},'cancel')" style="user-select: none;"> ← </button>
+        <button ontouchstart="sendMessage({a:false,b:false,y:false,x:false},'X)" onclick="sendMessage({a:false,b:false,y:false,x:false},'x')" style="user-select: none;"> x </button>
             <button ontouchstart="sendMessage({x:true}),'start'" ontouchend="sendMessage({x:false},'end')" touchcancel="sendMessage({x:false},'cancel')" style="user-select: none;"> → </button><br><br>
             <button ontouchstart="sendMessage({a:true}),'start'" ontouchend="sendMessage({a:false},'end')" touchcancel="sendMessage({a:false},'cancel')" style="user-select: none;"> ↓ </button>
     </div>    
