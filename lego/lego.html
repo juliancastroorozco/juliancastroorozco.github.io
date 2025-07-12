@@ -180,11 +180,17 @@
 
 <body>    
     <div style="text-align:center;width:100%">            
-            <button ontouchstart="sendMessage({y:true},'start')" touchend="sendMessage({y:false},'end')" touchcancel="sendMessage({y:false},'cancel')" onmousedown="sendMessage({y:true},'mousedown')" onmouseup="sendMessage({y:false},'mouseup')" style="user-select: none;"> ↑ </button><br><br>
-            <button ontouchstart="sendMessage({b:true},'start')" touchend="sendMessage({b:false},'end')" onmousedown="sendMessage({b:true},'mousedown')" onmouseup="sendMessage({b:false},'mouseup')" style="user-select: none;"> ← </button>
-            <button ontouchstart="sendMessage({x:true}),'start'" touchend="sendMessage({x:false},'end')" onmousedown="sendMessage({x:true},'mousedown')" onmouseup="sendMessage({x:false},'mouseup')" style="user-select: none;"> → </button><br><br>
-            <button ontouchstart="sendMessage({a:true}),'start'" touchend="sendMessage({a:false},'end')" onmousedown="sendMessage({a:true},'mousedown')" onmouseup="sendMessage({a:false},'mouseup')" style="user-select: none;"> ↓ </button>
+            <button ontouchstart="sendMessage({y:true},'start')" ontouchend="sendMessage({y:false},'end')" touchcancel="sendMessage({y:false},'cancel')" style="user-select: none;"> ↑ </button><br><br>
+            <button ontouchstart="sendMessage({b:true},'start')" ontouchend="sendMessage({b:false},'end')" onmousedown="sendMessage({b:true},'mousedown')" style="user-select: none;"> ← </button>
+            <button ontouchstart="sendMessage({x:true}),'start'" ontouchend="sendMessage({x:false},'end')" onmousedown="sendMessage({x:true},'mousedown')" style="user-select: none;"> → </button><br><br>
+            <button ontouchstart="sendMessage({a:true}),'start'" ontouchend="sendMessage({a:false},'end')" onmousedown="sendMessage({a:true},'mousedown')" style="user-select: none;"> ↓ </button>
     </div>    
+    <div style="text-align:center;width:100%">            
+            <button onmousedown="sendMessage({y:true},'mousedown')" onmouseup="sendMessage({y:false},'mouseup')" style="user-select: none;"> ↑ </button><br><br>
+            <button onmousedown="sendMessage({b:true},'mousedown')" onmouseup="sendMessage({b:false},'mouseup')" style="user-select: none;"> ← </button>
+            <button onmousedown="sendMessage({x:true},'mousedown')" onmouseup="sendMessage({x:false},'mouseup')" style="user-select: none;"> → </button><br><br>
+            <button onmousedown="sendMessage({a:true},'mousedown')" onmouseup="sendMessage({a:false},'mouseup')" style="user-select: none;"> ↓ </button>
+    </div>        
     <div>
         <br/>
         <button class="connect" type="button">Connect Joy-Con</button>
