@@ -57,8 +57,6 @@ div#console {
     border-radius: 3px;
     background-color: #333333;
     color: #ffffff;
-    width: 700px;
-    height: 500px;
     overflow: scroll;
     font-family: "Courier New", Courier;
 }
