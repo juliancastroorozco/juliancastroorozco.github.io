@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+e<!DOCTYPE html>
 <html>
 
 <head>
@@ -61,7 +61,7 @@
         const motorBForward = 100;
         let colour = 0;
         function buttonUpdated(buttons) {
-            log(JSON.stringify(buttons))
+            //log(JSON.stringify(buttons))
             if (!window.motorA || !window.motorB) {
                 return;
             }
@@ -189,9 +189,9 @@
 <body>    
     <div style="text-align:center;width:100%">            
             <button ontouchstart="sendMessage({y:true},'start')" ontouchend="sendMessage({y:false},'end')" touchcancel="sendMessage({y:false},'cancel')" style="user-select: none;"> ↑ </button><br><br>
-            <button ontouchstart="sendMessage({b:true},'start')" ontouchend="sendMessage({b:false},'end')" onmousedown="sendMessage({b:true},'mousedown')" style="user-select: none;"> ← </button>
-            <button ontouchstart="sendMessage({x:true}),'start'" ontouchend="sendMessage({x:false},'end')" onmousedown="sendMessage({x:true},'mousedown')" style="user-select: none;"> → </button><br><br>
-            <button ontouchstart="sendMessage({a:true}),'start'" ontouchend="sendMessage({a:false},'end')" onmousedown="sendMessage({a:true},'mousedown')" style="user-select: none;"> ↓ </button>
+            <button ontouchstart="sendMessage({b:true},'start')" ontouchend="sendMessage({b:false},'end')" touchcancel="sendMessage({b:false},'cancel')" style="user-select: none;"> ← </button>
+            <button ontouchstart="sendMessage({x:true}),'start'" ontouchend="sendMessage({x:false},'end')" touchcancel="sendMessage({x:false},'cancel')" style="user-select: none;"> → </button><br><br>
+            <button ontouchstart="sendMessage({a:true}),'start'" ontouchend="sendMessage({a:false},'end')" touchcancel="sendMessage({a:false},'cancel')" style="user-select: none;"> ↓ </button>
     </div>    
     <div style="text-align:center;width:100%">            
             <button onmousedown="sendMessage({y:true},'mousedown')" onmouseup="sendMessage({y:false},'mouseup')" style="user-select: none;"> ↑ </button><br><br>
