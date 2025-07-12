@@ -99,6 +99,9 @@
 
             hub.on("attach", (device) => {
                 log(`Device ${device.typeName} attached to port ${device.portName}`);
+                if(['A','B','C','D'].includes(device.portName)){
+                    window[`motor${device.portName}`] = device;
+                }
             });
 
             hub.on("detach", (device) => {
@@ -107,9 +110,9 @@
 
             await hub.connect(); // Connect to hub
             log(`Connected to ${hub.name}!`);
-            window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
-            window.motorB = await hub.waitForDeviceAtPort("B");
-            window.motorD = await hub.waitForDeviceAtPort("D");
+            //window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
+            //window.motorB = await hub.waitForDeviceAtPort("B");
+            //window.motorD = await hub.waitForDeviceAtPort("D");
             hub.on("disconnect", () => {
                 log(`Disconnected ${hub.name}`);
             })
