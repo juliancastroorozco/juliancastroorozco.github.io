@@ -2,7 +2,13 @@
 <html>
 
 <head>
-    <title>Web Bluetooth node-poweredup Example 3</title>
+    <style>
+        button:active{    
+         background-color: red;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Bluetooth node-poweredup Example 8</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/node-poweredup@latest/dist/browser/poweredup.js"></script> -->
     <script src="../dist/browser/poweredup.js"></script>
     <script src="./joy.js" type="module"></script>
@@ -32,12 +38,14 @@
             const data = snapshot.val();
             //updateStarCount(postElement, data);
             console.log(data);
+            //log(JSON.stringify(data))
             buttonUpdated(data);
         });
-        set(ref(db, 'commands/'), {
+        /*set(ref(db, 'commands/'), {
             a:false,b:true
-        });
-        window.sendMessage = function (message){
+        });*/
+        window.sendMessage = function (message,source){
+            log(JSON.stringify({message,source}))
             set(ref(db, 'commands/'), message);            
         }
     </script>
@@ -98,7 +106,7 @@
                 log(`Disconnected ${hub.name}`);
             })
 
-            hub.on("tilt", (device, { x, y, z }) => {
+            /*hub.on("tilt", (device, { x, y, z }) => {
                 log(`Tilt detected on port ${device.portName} (X: ${x}, Y: ${y}${z !== undefined ? `, Z: ${z}` : ""})`);
             });
 
@@ -108,15 +116,15 @@
 
             hub.on("rotate", (device, { degrees }) => {
                 log(`Rotation detected on port ${device.portName} (Degrees: ${degrees})`);
-            });
+            });*/
 
             hub.on("button", ({ event }) => {
                 log(`Green button press detected (Event: ${event})`);
             });
 
-            hub.on("remoteButton", (device, { event }) => {
+            /*hub.on("remoteButton", (device, { event }) => {
                 log(`Remote control button press detected on port ${device.portName} (Event: ${event})`);
-            });
+            });*/
 
             renderHub(hub);
             window.hub = hub;
@@ -169,13 +177,13 @@
 
 <body>
     <div>
-        <h1>Web Bluetooth node-poweredup Example 7</h1>
+        <h1>Web Bluetooth node-poweredup Example 8</h1>
     </div>
     <div style="text-align:center;width:100%">            
-            <button ontouchstart="sendMessage({y:true})" touchend="sendMessage({y:false})" onmousedown="sendMessage({y:true})" onmouseup="sendMessage({y:false})" style="user-select: none;"> ↑ </button><br><br>
-            <button ontouchstart="sendMessage({b:true})" touchend="sendMessage({b:false})" onmousedown="sendMessage({b:true})" onmouseup="sendMessage({b:false})" style="user-select: none;"> ← </button>
-            <button ontouchstart="sendMessage({x:true})" touchend="sendMessage({x:false})" onmousedown="sendMessage({x:true})" onmouseup="sendMessage({x:false})" style="user-select: none;"> → </button><br><br>
-            <button ontouchstart="sendMessage({a:true})" touchend="sendMessage({a:false})" onmousedown="sendMessage({a:true})" onmouseup="sendMessage({a:false})" style="user-select: none;"> ↓ </button>
+            <button ontouchstart="sendMessage({y:true},'start')" touchend="sendMessage({y:false},'end')" onmousedown="sendMessage({y:true},'mousedown')" onmouseup="sendMessage({y:false},'mouseup')" style="user-select: none;"> ↑ </button><br><br>
+            <button ontouchstart="sendMessage({b:true},'start')" touchend="sendMessage({b:false},'end')" onmousedown="sendMessage({b:true},'mousedown')" onmouseup="sendMessage({b:false},'mouseup')" style="user-select: none;"> ← </button>
+            <button ontouchstart="sendMessage({x:true}),'start'" touchend="sendMessage({x:false},'end')" onmousedown="sendMessage({x:true},'mousedown')" onmouseup="sendMessage({x:false},'mouseup')" style="user-select: none;"> → </button><br><br>
+            <button ontouchstart="sendMessage({a:true}),'start'" touchend="sendMessage({a:false},'end')" onmousedown="sendMessage({a:true},'mousedown')" onmouseup="sendMessage({a:false},'mouseup')" style="user-select: none;"> ↓ </button>
     </div>    
     <div>
         <br/>
@@ -199,6 +207,8 @@
         </table>
     </div>
     <div id="console"></div>
+    <div id="msg"></div>
+    <div id="source"></div>
 </body>
 
 </html>
