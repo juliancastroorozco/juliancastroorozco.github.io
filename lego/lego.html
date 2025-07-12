@@ -109,6 +109,7 @@
             log(`Connected to ${hub.name}!`);
             window.motorA = await hub.waitForDeviceAtPort("A"); // Make sure a motor is plugged into port A
             window.motorB = await hub.waitForDeviceAtPort("B");
+            window.motorD = await hub.waitForDeviceAtPort("D");
             hub.on("disconnect", () => {
                 log(`Disconnected ${hub.name}`);
             })
