@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoFS Script Loader</title>
+</head>
+<body>
+    <h1>GeoFS Script Loader</h1>
+    <p>Click the button below to load all GeoFS scripts into the page:</p>
+    <button id="loadScripts">Load GeoFS Scripts</button>
+
+    <script>
+        document.getElementById('loadScripts').addEventListener('click', function() {
+            const scripts = [
+                'https://github.com/juliancastroorozco/juliancastroorozco.github.io/raw/refs/heads/main/geo-fs/geo-fs-adf.user.js',
+                'https://github.com/juliancastroorozco/juliancastroorozco.github.io/raw/refs/heads/main/geo-fs/geo-fs-eta.user.js',
+                'https://github.com/juliancastroorozco/geo-fs-GeoFS-Minimap/raw/refs/heads/main/geo-fs-GeoFS-Minimap.user.js',
+                'https://greasyfork.org/scripts/485670/code/Better%20Resolution%20Terrain.user.js?version=latest',
+                'https://rawcdn.githack.com/af267/GeoFS-Extra-Vehicles/refs/heads/main/main.js'
+            ];
+
+            scripts.forEach(url => {
+                const s = document.createElement('script');
+                s.src = url;
+                s.async = false; // maintain execution order
+                document.head.appendChild(s);
+            });
+
+            alert('Scripts loaded!');
+        });
+    </script>
+</body>
+</html>
